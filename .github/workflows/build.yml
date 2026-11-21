@@ -22,44 +22,175 @@ jobs:
         with:
           gradle-version: 8.10.2
 
-      - name: Generate project files (Gradle settings, mod code, icon)
+      - name: Generate project files (Gradle settings, Brass track and bogey, textures, icon)
         run: |
-          mkdir -p $(dirname 'settings.gradle')
-          cat > 'settings.gradle' <<'EOF_0'
+          mkdir -p "$(dirname 'src/main/resources/assets/railworks/models/block/track/brass/obj_track.json')"
+          cat > 'src/main/resources/assets/railworks/models/block/track/brass/obj_track.json' <<'EOF_1'
+          {"ambientocclusion":false,"textures":{"0":"railworks:block/brass_track","1":"railworks:block/brass_track_mip","2":"railworks:block/brass_track_crossing","particle":"create:block/palettes/stone_types/polished/andesite_cut_polished"}}
+          EOF_1
+          mkdir -p "$(dirname 'src/main/resources/assets/railworks/models/block/track/brass/tie.json')"
+          cat > 'src/main/resources/assets/railworks/models/block/track/brass/tie.json' <<'EOF_2'
+          {"parent":"railworks:block/track/brass/obj_track","loader":"neoforge:obj","flip_v":true,"model":"create:models/block/track/tie.obj","render_type":"minecraft:cutout_mipped"}
+          EOF_2
+          mkdir -p "$(dirname 'src/main/resources/assets/railworks/models/block/track/brass/segment_left.json')"
+          cat > 'src/main/resources/assets/railworks/models/block/track/brass/segment_left.json' <<'EOF_3'
+          {"parent":"railworks:block/track/brass/obj_track","loader":"neoforge:obj","flip_v":true,"model":"create:models/block/track/segment_left.obj"}
+          EOF_3
+          mkdir -p "$(dirname 'src/main/resources/assets/railworks/models/block/track/brass/segment_right.json')"
+          cat > 'src/main/resources/assets/railworks/models/block/track/brass/segment_right.json' <<'EOF_4'
+          {"parent":"railworks:block/track/brass/obj_track","loader":"neoforge:obj","flip_v":true,"model":"create:models/block/track/segment_right.obj"}
+          EOF_4
+          mkdir -p "$(dirname 'src/main/resources/assets/railworks/models/block/track/brass/cross_d1_xo.json')"
+          cat > 'src/main/resources/assets/railworks/models/block/track/brass/cross_d1_xo.json' <<'EOF_5'
+          {"parent":"railworks:block/track/brass/obj_track","loader":"neoforge:obj","flip_v":true,"model":"create:models/block/track/cross_d1_xo.obj"}
+          EOF_5
+          mkdir -p "$(dirname 'src/main/resources/assets/railworks/models/block/track/brass/cross_d1_zo.json')"
+          cat > 'src/main/resources/assets/railworks/models/block/track/brass/cross_d1_zo.json' <<'EOF_6'
+          {"parent":"railworks:block/track/brass/obj_track","loader":"neoforge:obj","flip_v":true,"model":"create:models/block/track/cross_d1_zo.obj"}
+          EOF_6
+          mkdir -p "$(dirname 'src/main/resources/assets/railworks/models/block/track/brass/cross_d2_xo.json')"
+          cat > 'src/main/resources/assets/railworks/models/block/track/brass/cross_d2_xo.json' <<'EOF_7'
+          {"parent":"railworks:block/track/brass/obj_track","loader":"neoforge:obj","flip_v":true,"model":"create:models/block/track/cross_d2_xo.obj"}
+          EOF_7
+          mkdir -p "$(dirname 'src/main/resources/assets/railworks/models/block/track/brass/cross_d2_zo.json')"
+          cat > 'src/main/resources/assets/railworks/models/block/track/brass/cross_d2_zo.json' <<'EOF_8'
+          {"parent":"railworks:block/track/brass/obj_track","loader":"neoforge:obj","flip_v":true,"model":"create:models/block/track/cross_d2_zo.obj"}
+          EOF_8
+          mkdir -p "$(dirname 'src/main/resources/assets/railworks/models/block/track/brass/cross_diag.json')"
+          cat > 'src/main/resources/assets/railworks/models/block/track/brass/cross_diag.json' <<'EOF_9'
+          {"parent":"railworks:block/track/brass/obj_track","loader":"neoforge:obj","flip_v":true,"model":"create:models/block/track/cross_diag.obj"}
+          EOF_9
+          mkdir -p "$(dirname 'src/main/resources/assets/railworks/models/block/track/brass/diag.json')"
+          cat > 'src/main/resources/assets/railworks/models/block/track/brass/diag.json' <<'EOF_10'
+          {"parent":"railworks:block/track/brass/obj_track","loader":"neoforge:obj","flip_v":true,"model":"create:models/block/track/diag.obj"}
+          EOF_10
+          mkdir -p "$(dirname 'src/main/resources/assets/railworks/models/block/track/brass/diag_2.json')"
+          cat > 'src/main/resources/assets/railworks/models/block/track/brass/diag_2.json' <<'EOF_11'
+          {"parent":"railworks:block/track/brass/obj_track","loader":"neoforge:obj","flip_v":true,"model":"create:models/block/track/diag_2.obj"}
+          EOF_11
+          mkdir -p "$(dirname 'src/main/resources/assets/railworks/models/block/track/brass/ascending.json')"
+          cat > 'src/main/resources/assets/railworks/models/block/track/brass/ascending.json' <<'EOF_12'
+          {"loader":"neoforge:obj","ambientocclusion":false,"flip_v":true,"model":"create:models/block/track/ascending.obj","textures":{"0":"railworks:block/brass_track","1":"railworks:block/brass_track_mip","particle":"create:block/palettes/stone_types/polished/andesite_cut_polished"}}
+          EOF_12
+          mkdir -p "$(dirname 'src/main/resources/assets/railworks/models/block/track/brass/x_ortho.json')"
+          cat > 'src/main/resources/assets/railworks/models/block/track/brass/x_ortho.json' <<'EOF_13'
+          {"parent":"create:block/track/x_ortho","textures":{"1":"railworks:block/brass_track","2":"railworks:block/brass_track_mip","particle":"create:block/palettes/stone_types/polished/andesite_cut_polished"}}
+          EOF_13
+          mkdir -p "$(dirname 'src/main/resources/assets/railworks/models/block/track/brass/z_ortho.json')"
+          cat > 'src/main/resources/assets/railworks/models/block/track/brass/z_ortho.json' <<'EOF_14'
+          {"parent":"create:block/track/z_ortho","textures":{"1":"railworks:block/brass_track","2":"railworks:block/brass_track_mip","particle":"create:block/palettes/stone_types/polished/andesite_cut_polished"}}
+          EOF_14
+          mkdir -p "$(dirname 'src/main/resources/assets/railworks/models/block/track/brass/cross_ortho.json')"
+          cat > 'src/main/resources/assets/railworks/models/block/track/brass/cross_ortho.json' <<'EOF_15'
+          {"parent":"create:block/track/cross_ortho","textures":{"1":"railworks:block/brass_track","2":"railworks:block/brass_track_mip","3":"railworks:block/brass_track_crossing","particle":"railworks:block/brass_track_crossing"}}
+          EOF_15
+          mkdir -p "$(dirname 'src/main/resources/assets/railworks/blockstates/brass_track.json')"
+          cat > 'src/main/resources/assets/railworks/blockstates/brass_track.json' <<'EOF_16'
+          {"variants":{"shape=ae,turn=false,waterlogged=false":{"model":"railworks:block/track/brass/ascending","y":270},"shape=ae,turn=false,waterlogged=true":{"model":"railworks:block/track/brass/ascending","y":270},"shape=ae,turn=true,waterlogged=false":{"model":"railworks:block/track/brass/ascending","y":270},"shape=ae,turn=true,waterlogged=true":{"model":"railworks:block/track/brass/ascending","y":270},"shape=an,turn=false,waterlogged=false":{"model":"railworks:block/track/brass/ascending","y":180},"shape=an,turn=false,waterlogged=true":{"model":"railworks:block/track/brass/ascending","y":180},"shape=an,turn=true,waterlogged=false":{"model":"railworks:block/track/brass/ascending","y":180},"shape=an,turn=true,waterlogged=true":{"model":"railworks:block/track/brass/ascending","y":180},"shape=as,turn=false,waterlogged=false":{"model":"railworks:block/track/brass/ascending"},"shape=as,turn=false,waterlogged=true":{"model":"railworks:block/track/brass/ascending"},"shape=as,turn=true,waterlogged=false":{"model":"railworks:block/track/brass/ascending"},"shape=as,turn=true,waterlogged=true":{"model":"railworks:block/track/brass/ascending"},"shape=aw,turn=false,waterlogged=false":{"model":"railworks:block/track/brass/ascending","y":90},"shape=aw,turn=false,waterlogged=true":{"model":"railworks:block/track/brass/ascending","y":90},"shape=aw,turn=true,waterlogged=false":{"model":"railworks:block/track/brass/ascending","y":90},"shape=aw,turn=true,waterlogged=true":{"model":"railworks:block/track/brass/ascending","y":90},"shape=cr_d,turn=false,waterlogged=false":{"model":"railworks:block/track/brass/cross_diag"},"shape=cr_d,turn=false,waterlogged=true":{"model":"railworks:block/track/brass/cross_diag"},"shape=cr_d,turn=true,waterlogged=false":{"model":"railworks:block/track/brass/cross_diag"},"shape=cr_d,turn=true,waterlogged=true":{"model":"railworks:block/track/brass/cross_diag"},"shape=cr_ndx,turn=false,waterlogged=false":{"model":"railworks:block/track/brass/cross_d2_xo"},"shape=cr_ndx,turn=false,waterlogged=true":{"model":"railworks:block/track/brass/cross_d2_xo"},"shape=cr_ndx,turn=true,waterlogged=false":{"model":"railworks:block/track/brass/cross_d2_xo"},"shape=cr_ndx,turn=true,waterlogged=true":{"model":"railworks:block/track/brass/cross_d2_xo"},"shape=cr_ndz,turn=false,waterlogged=false":{"model":"railworks:block/track/brass/cross_d2_zo"},"shape=cr_ndz,turn=false,waterlogged=true":{"model":"railworks:block/track/brass/cross_d2_zo"},"shape=cr_ndz,turn=true,waterlogged=false":{"model":"railworks:block/track/brass/cross_d2_zo"},"shape=cr_ndz,turn=true,waterlogged=true":{"model":"railworks:block/track/brass/cross_d2_zo"},"shape=cr_o,turn=false,waterlogged=false":{"model":"railworks:block/track/brass/cross_ortho"},"shape=cr_o,turn=false,waterlogged=true":{"model":"railworks:block/track/brass/cross_ortho"},"shape=cr_o,turn=true,waterlogged=false":{"model":"railworks:block/track/brass/cross_ortho"},"shape=cr_o,turn=true,waterlogged=true":{"model":"railworks:block/track/brass/cross_ortho"},"shape=cr_pdx,turn=false,waterlogged=false":{"model":"railworks:block/track/brass/cross_d1_xo"},"shape=cr_pdx,turn=false,waterlogged=true":{"model":"railworks:block/track/brass/cross_d1_xo"},"shape=cr_pdx,turn=true,waterlogged=false":{"model":"railworks:block/track/brass/cross_d1_xo"},"shape=cr_pdx,turn=true,waterlogged=true":{"model":"railworks:block/track/brass/cross_d1_xo"},"shape=cr_pdz,turn=false,waterlogged=false":{"model":"railworks:block/track/brass/cross_d1_zo"},"shape=cr_pdz,turn=false,waterlogged=true":{"model":"railworks:block/track/brass/cross_d1_zo"},"shape=cr_pdz,turn=true,waterlogged=false":{"model":"railworks:block/track/brass/cross_d1_zo"},"shape=cr_pdz,turn=true,waterlogged=true":{"model":"railworks:block/track/brass/cross_d1_zo"},"shape=nd,turn=false,waterlogged=false":{"model":"railworks:block/track/brass/diag_2"},"shape=nd,turn=false,waterlogged=true":{"model":"railworks:block/track/brass/diag_2"},"shape=nd,turn=true,waterlogged=false":{"model":"railworks:block/track/brass/diag_2"},"shape=nd,turn=true,waterlogged=true":{"model":"railworks:block/track/brass/diag_2"},"shape=none,turn=false,waterlogged=false":{"model":"minecraft:block/air"},"shape=none,turn=false,waterlogged=true":{"model":"minecraft:block/air"},"shape=none,turn=true,waterlogged=false":{"model":"minecraft:block/air"},"shape=none,turn=true,waterlogged=true":{"model":"minecraft:block/air"},"shape=pd,turn=false,waterlogged=false":{"model":"railworks:block/track/brass/diag"},"shape=pd,turn=false,waterlogged=true":{"model":"railworks:block/track/brass/diag"},"shape=pd,turn=true,waterlogged=false":{"model":"railworks:block/track/brass/diag"},"shape=pd,turn=true,waterlogged=true":{"model":"railworks:block/track/brass/diag"},"shape=te,turn=false,waterlogged=false":{"model":"create:block/track/teleport","y":270},"shape=te,turn=false,waterlogged=true":{"model":"create:block/track/teleport","y":270},"shape=te,turn=true,waterlogged=false":{"model":"create:block/track/teleport","y":270},"shape=te,turn=true,waterlogged=true":{"model":"create:block/track/teleport","y":270},"shape=tn,turn=false,waterlogged=false":{"model":"create:block/track/teleport","y":180},"shape=tn,turn=false,waterlogged=true":{"model":"create:block/track/teleport","y":180},"shape=tn,turn=true,waterlogged=false":{"model":"create:block/track/teleport","y":180},"shape=tn,turn=true,waterlogged=true":{"model":"create:block/track/teleport","y":180},"shape=ts,turn=false,waterlogged=false":{"model":"create:block/track/teleport"},"shape=ts,turn=false,waterlogged=true":{"model":"create:block/track/teleport"},"shape=ts,turn=true,waterlogged=false":{"model":"create:block/track/teleport"},"shape=ts,turn=true,waterlogged=true":{"model":"create:block/track/teleport"},"shape=tw,turn=false,waterlogged=false":{"model":"create:block/track/teleport","y":90},"shape=tw,turn=false,waterlogged=true":{"model":"create:block/track/teleport","y":90},"shape=tw,turn=true,waterlogged=false":{"model":"create:block/track/teleport","y":90},"shape=tw,turn=true,waterlogged=true":{"model":"create:block/track/teleport","y":90},"shape=xo,turn=false,waterlogged=false":{"model":"railworks:block/track/brass/x_ortho"},"shape=xo,turn=false,waterlogged=true":{"model":"railworks:block/track/brass/x_ortho"},"shape=xo,turn=true,waterlogged=false":{"model":"railworks:block/track/brass/x_ortho"},"shape=xo,turn=true,waterlogged=true":{"model":"railworks:block/track/brass/x_ortho"},"shape=zo,turn=false,waterlogged=false":{"model":"railworks:block/track/brass/z_ortho"},"shape=zo,turn=false,waterlogged=true":{"model":"railworks:block/track/brass/z_ortho"},"shape=zo,turn=true,waterlogged=false":{"model":"railworks:block/track/brass/z_ortho"},"shape=zo,turn=true,waterlogged=true":{"model":"railworks:block/track/brass/z_ortho"}}}
+          EOF_16
+          mkdir -p "$(dirname 'src/main/resources/assets/railworks/blockstates/brass_bogey.json')"
+          cat > 'src/main/resources/assets/railworks/blockstates/brass_bogey.json' <<'EOF_17'
+          {"variants":{"axis=x,waterlogged=false":{"model":"create:block/track/bogey/top","y":90},"axis=x,waterlogged=true":{"model":"create:block/track/bogey/top","y":90},"axis=z,waterlogged=false":{"model":"create:block/track/bogey/top"},"axis=z,waterlogged=true":{"model":"create:block/track/bogey/top"}}}
+          EOF_17
+          mkdir -p "$(dirname 'src/main/resources/assets/railworks/models/item/brass_track.json')"
+          cat > 'src/main/resources/assets/railworks/models/item/brass_track.json' <<'EOF_18'
+          {"parent":"minecraft:item/generated","textures":{"layer0":"railworks:item/brass_track"}}
+          EOF_18
+          mkdir -p "$(dirname 'src/main/resources/assets/railworks/models/block/bogey/frame.json')"
+          cat > 'src/main/resources/assets/railworks/models/block/bogey/frame.json' <<'EOF_19'
+          {"parent":"create:block/track/bogey/textures","loader":"neoforge:obj","flip_v":true,"model":"create:models/block/track/bogey/bogey_frame.obj","textures":{"bogey":"railworks:block/bogey/frame","bogey2":"railworks:block/bogey/frame2","wheel":"railworks:block/bogey/wheel"}}
+          EOF_19
+          mkdir -p "$(dirname 'src/main/resources/assets/railworks/models/block/bogey/wheel.json')"
+          cat > 'src/main/resources/assets/railworks/models/block/bogey/wheel.json' <<'EOF_20'
+          {"parent":"create:block/track/bogey/textures","loader":"neoforge:obj","flip_v":true,"model":"create:models/block/track/bogey/bogey_wheel.obj","textures":{"bogey":"railworks:block/bogey/frame","bogey2":"railworks:block/bogey/frame2","wheel":"railworks:block/bogey/wheel"}}
+          EOF_20
+          mkdir -p "$(dirname 'src/main/resources/assets/railworks/lang/en_us.json')"
+          cat > 'src/main/resources/assets/railworks/lang/en_us.json' <<'EOF_21'
+          {
+            "block.railworks.brass_track": "Brass Train Track",
+            "block.railworks.brass_bogey": "Brass Bogey",
+            "itemGroup.railworks": "Railworks",
+            "railworks.bogey.style.brass": "Brass"
+          }
+          EOF_21
+          mkdir -p "$(dirname 'src/main/resources/data/railworks/loot_table/blocks/brass_track.json')"
+          cat > 'src/main/resources/data/railworks/loot_table/blocks/brass_track.json' <<'EOF_22'
+          {"type":"minecraft:block","pools":[{"bonus_rolls":0.0,"conditions":[{"condition":"minecraft:survives_explosion"}],"entries":[{"type":"minecraft:item","name":"railworks:brass_track"}],"rolls":1.0}],"random_sequence":"railworks:blocks/brass_track"}
+          EOF_22
+          mkdir -p "$(dirname 'src/main/resources/data/railworks/loot_table/blocks/brass_bogey.json')"
+          cat > 'src/main/resources/data/railworks/loot_table/blocks/brass_bogey.json' <<'EOF_23'
+          {"type":"minecraft:block","pools":[{"bonus_rolls":0.0,"conditions":[{"condition":"minecraft:survives_explosion"}],"entries":[{"type":"minecraft:item","name":"create:railway_casing"}],"rolls":1.0}],"random_sequence":"railworks:blocks/brass_bogey"}
+          EOF_23
+          mkdir -p "$(dirname 'src/main/resources/data/create/tags/block/tracks.json')"
+          cat > 'src/main/resources/data/create/tags/block/tracks.json' <<'EOF_24'
+          {"values":["railworks:brass_track"]}
+          EOF_24
+          mkdir -p "$(dirname 'src/main/resources/data/create/tags/block/girdable_tracks.json')"
+          cat > 'src/main/resources/data/create/tags/block/girdable_tracks.json' <<'EOF_25'
+          {"values":["railworks:brass_track"]}
+          EOF_25
+          mkdir -p "$(dirname 'src/main/resources/data/create/tags/item/tracks.json')"
+          cat > 'src/main/resources/data/create/tags/item/tracks.json' <<'EOF_26'
+          {"values":["railworks:brass_track"]}
+          EOF_26
+          mkdir -p "$(dirname 'src/main/resources/data/c/tags/block/relocation_not_supported.json')"
+          cat > 'src/main/resources/data/c/tags/block/relocation_not_supported.json' <<'EOF_27'
+          {"values":["railworks:brass_track"]}
+          EOF_27
+          mkdir -p "$(dirname 'src/main/resources/data/minecraft/tags/block/mineable/pickaxe.json')"
+          cat > 'src/main/resources/data/minecraft/tags/block/mineable/pickaxe.json' <<'EOF_28'
+          {"values":["railworks:brass_track","railworks:brass_bogey"]}
+          EOF_28
+          mkdir -p "$(dirname 'src/main/resources/data/railworks/recipe/brass_track.json')"
+          cat > 'src/main/resources/data/railworks/recipe/brass_track.json' <<'EOF_29'
+          {"type":"minecraft:crafting_shaped","category":"misc","pattern":["N N","BBB"],"key":{"N":{"item":"minecraft:iron_nugget"},"B":{"item":"create:brass_ingot"}},"result":{"id":"railworks:brass_track","count":6}}
+          EOF_29
+          mkdir -p "$(dirname 'settings.gradle')"
+          cat > 'settings.gradle' <<'EOF_30'
           rootProject.name = 'railworks'
-          EOF_0
-          mkdir -p $(dirname 'build.gradle')
-          cat > 'build.gradle' <<'EOF_1'
+          EOF_30
+          mkdir -p "$(dirname 'build.gradle')"
+          cat > 'build.gradle' <<'EOF_31'
           plugins {
               id 'java'
               id 'net.neoforged.moddev' version '2.0.+'
           }
 
-          version = '1.0.0'
+          version = '1.1.0'
           group = 'com.example.railworks'
           base { archivesName = 'railworks' }
           java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
           repositories {
               mavenCentral()
+              maven { url = 'https://maven.createmod.net' }
+              maven { url = 'https://maven.ithundxr.dev/snapshots' }
           }
 
           neoForge {
               version = '21.1.219'
               mods { railworks { sourceSet sourceSets.main } }
           }
-          EOF_1
-          mkdir -p $(dirname 'src/main/resources/META-INF/neoforge.mods.toml')
-          cat > 'src/main/resources/META-INF/neoforge.mods.toml' <<'EOF_2'
+
+          dependencies {
+              implementation("com.simibubi.create:create-1.21.1:6.0.10-279:slim") { transitive = false }
+              implementation("net.createmod.ponder:ponder-neoforge:1.0.82+mc1.21.1")
+              compileOnly("dev.engine-room.flywheel:flywheel-neoforge-api-1.21.1:1.0.6")
+              runtimeOnly("dev.engine-room.flywheel:flywheel-neoforge-1.21.1:1.0.6")
+              implementation("com.tterrag.registrate:Registrate:MC1.21-1.3.0+67")
+          }
+          EOF_31
+          mkdir -p "$(dirname 'src/main/resources/META-INF/neoforge.mods.toml')"
+          cat > 'src/main/resources/META-INF/neoforge.mods.toml' <<'EOF_32'
           modLoader = "javafml"
           loaderVersion = "[1,)"
           license = "MIT"
 
           [[mods]]
           modId = "railworks"
-          version = "1.0.0"
+          version = "1.1.0"
           displayName = "Railworks"
-          description = '''A Create addon: bogie frames and rail hardware.'''
+          description = '''A Create addon: Brass train track with its own Brass bogey.'''
           logoFile = "logo.png"
           authors = "You"
 
@@ -83,23 +214,19 @@ jobs:
           versionRange = "[6.0.6,)"
           ordering = "AFTER"
           side = "BOTH"
-          EOF_2
-          mkdir -p $(dirname 'src/main/java/com/example/railworks/Railworks.java')
-          cat > 'src/main/java/com/example/railworks/Railworks.java' <<'EOF_3'
+          EOF_32
+          mkdir -p "$(dirname 'src/main/java/com/example/railworks/Railworks.java')"
+          cat > 'src/main/java/com/example/railworks/Railworks.java' <<'EOF_33'
           package com.example.railworks;
+
+          import com.simibubi.create.foundation.data.CreateRegistrate;
 
           import net.minecraft.core.registries.Registries;
           import net.minecraft.network.chat.Component;
-          import net.minecraft.world.item.BlockItem;
+          import net.minecraft.resources.ResourceLocation;
           import net.minecraft.world.item.CreativeModeTab;
-          import net.minecraft.world.item.Item;
-          import net.minecraft.world.level.block.Block;
-          import net.minecraft.world.level.block.state.BlockBehaviour;
-          import net.minecraft.world.level.material.MapColor;
           import net.neoforged.bus.api.IEventBus;
           import net.neoforged.fml.common.Mod;
-          import net.neoforged.neoforge.registries.DeferredBlock;
-          import net.neoforged.neoforge.registries.DeferredItem;
           import net.neoforged.neoforge.registries.DeferredRegister;
 
           import java.util.function.Supplier;
@@ -107,51 +234,563 @@ jobs:
           @Mod(Railworks.MODID)
           public class Railworks {
               public static final String MODID = "railworks";
+              public static final CreateRegistrate REGISTRATE = CreateRegistrate.create(MODID);
 
-              public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MODID);
-              public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MODID);
               public static final DeferredRegister<CreativeModeTab> TABS =
                       DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
-
-              public static final DeferredBlock<Block> BOGIE_FRAME = BLOCKS.registerSimpleBlock("bogie_frame",
-                      BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(3.0f, 6.0f).requiresCorrectToolForDrops());
-              public static final DeferredItem<BlockItem> BOGIE_FRAME_ITEM = ITEMS.registerSimpleBlockItem(BOGIE_FRAME);
 
               public static final Supplier<CreativeModeTab> MAIN_TAB = TABS.register("main", () ->
                       CreativeModeTab.builder()
                               .title(Component.translatable("itemGroup.railworks"))
-                              .icon(() -> BOGIE_FRAME_ITEM.get().getDefaultInstance())
-                              .displayItems((params, out) -> out.accept(BOGIE_FRAME_ITEM.get()))
+                              .icon(() -> RWBlocks.BRASS_TRACK.asStack())
+                              .displayItems((params, out) -> out.accept(RWBlocks.BRASS_TRACK.get()))
                               .build());
 
+              public static ResourceLocation id(String path) {
+                  return ResourceLocation.fromNamespaceAndPath(MODID, path);
+              }
+
               public Railworks(IEventBus modBus) {
-                  BLOCKS.register(modBus);
-                  ITEMS.register(modBus);
+                  REGISTRATE.registerEventListeners(modBus);
                   TABS.register(modBus);
+                  // Order matters: track material -> blocks -> block entities -> bogey style
+                  RWTracks.init();
+                  RWBlocks.init();
+                  RWBlockEntities.init();
+                  RWBogeys.init();
               }
           }
-          EOF_3
-          mkdir -p $(dirname 'src/main/resources/assets/railworks/blockstates/bogie_frame.json')
-          cat > 'src/main/resources/assets/railworks/blockstates/bogie_frame.json' <<'EOF_4'
-          {"variants":{"":{"model":"railworks:block/bogie_frame"}}}
-          EOF_4
-          mkdir -p $(dirname 'src/main/resources/assets/railworks/models/block/bogie_frame.json')
-          cat > 'src/main/resources/assets/railworks/models/block/bogie_frame.json' <<'EOF_5'
-          {"parent":"minecraft:block/cube_all","textures":{"all":"railworks:block/bogie_frame"}}
-          EOF_5
-          mkdir -p $(dirname 'src/main/resources/assets/railworks/models/item/bogie_frame.json')
-          cat > 'src/main/resources/assets/railworks/models/item/bogie_frame.json' <<'EOF_6'
-          {"parent":"railworks:block/bogie_frame"}
-          EOF_6
-          mkdir -p $(dirname 'src/main/resources/assets/railworks/lang/en_us.json')
-          cat > 'src/main/resources/assets/railworks/lang/en_us.json' <<'EOF_7'
-          {
-            "block.railworks.bogie_frame": "Bogie Frame",
-            "itemGroup.railworks": "Railworks"
+          EOF_33
+          mkdir -p "$(dirname 'src/main/java/com/example/railworks/RWTracks.java')"
+          cat > 'src/main/java/com/example/railworks/RWTracks.java' <<'EOF_34'
+          package com.example.railworks;
+
+          import com.simibubi.create.content.trains.track.TrackMaterial;
+          import com.simibubi.create.content.trains.track.TrackMaterialFactory;
+          import com.tterrag.registrate.util.nullness.NonNullSupplier;
+
+          import net.minecraft.resources.ResourceLocation;
+
+          /** The Brass track type. Bogeys of the Brass style only run on this track type. */
+          public class RWTracks {
+              public static final TrackMaterial.TrackType BRASS_TYPE =
+                      new TrackMaterial.TrackType(Railworks.id("brass"), BrassTrackBlock::new);
+
+              public static final TrackMaterial BRASS = TrackMaterialFactory.make(Railworks.id("brass"))
+                      .lang("Brass")
+                      .block(NonNullSupplier.lazy(() -> RWBlocks.BRASS_TRACK))
+                      .particle(ResourceLocation.fromNamespaceAndPath("create",
+                              "block/palettes/stone_types/polished/andesite_cut_polished"))
+                      .trackType(BRASS_TYPE)
+                      .standardModels()
+                      .noRecipeGen()
+                      .build();
+
+              public static void init() {
+              }
           }
-          EOF_7
-          mkdir -p src/main/resources/assets/railworks/textures/block
-          base64 -d > src/main/resources/logo.png <<'EOF_LOGO'
+          EOF_34
+          mkdir -p "$(dirname 'src/main/java/com/example/railworks/BrassTrackBlock.java')"
+          cat > 'src/main/java/com/example/railworks/BrassTrackBlock.java' <<'EOF_35'
+          package com.example.railworks;
+
+          import com.simibubi.create.content.trains.track.TrackBlock;
+          import com.simibubi.create.content.trains.track.TrackMaterial;
+          import com.simibubi.create.content.trains.track.TrackShape;
+
+          import net.minecraft.core.BlockPos;
+          import net.minecraft.core.Direction;
+          import net.minecraft.world.level.BlockGetter;
+          import net.minecraft.world.level.block.state.BlockBehaviour;
+          import net.minecraft.world.level.block.state.BlockState;
+          import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+
+          public class BrassTrackBlock extends TrackBlock {
+              public BrassTrackBlock(BlockBehaviour.Properties properties, TrackMaterial material) {
+                  super(properties, material);
+              }
+
+              /** Train stations place the Brass bogey on Brass track. */
+              @Override
+              public BlockState getBogeyAnchor(BlockGetter world, BlockPos pos, BlockState state) {
+                  return RWBlocks.BRASS_BOGEY.getDefaultState()
+                          .setValue(BlockStateProperties.HORIZONTAL_AXIS,
+                                  state.getValue(SHAPE) == TrackShape.XO ? Direction.Axis.X : Direction.Axis.Z);
+              }
+          }
+          EOF_35
+          mkdir -p "$(dirname 'src/main/java/com/example/railworks/RWBlocks.java')"
+          cat > 'src/main/java/com/example/railworks/RWBlocks.java' <<'EOF_36'
+          package com.example.railworks;
+
+          import com.simibubi.create.content.trains.track.TrackBlock;
+          import com.simibubi.create.content.trains.track.TrackBlockItem;
+          import com.simibubi.create.content.trains.track.TrackModel;
+          import com.simibubi.create.foundation.data.CreateRegistrate;
+          import com.simibubi.create.foundation.data.SharedProperties;
+          import com.tterrag.registrate.util.entry.BlockEntry;
+
+          import net.minecraft.client.renderer.RenderType;
+          import net.minecraft.world.level.block.SoundType;
+          import net.minecraft.world.level.material.MapColor;
+
+          public class RWBlocks {
+              public static final BlockEntry<TrackBlock> BRASS_TRACK = Railworks.REGISTRATE
+                      .block("brass_track", RWTracks.BRASS::createBlock)
+                      .initialProperties(SharedProperties::stone)
+                      .properties(p -> p.mapColor(MapColor.GOLD)
+                              .strength(0.8F)
+                              .sound(SoundType.METAL)
+                              .noOcclusion()
+                              .forceSolidOn())
+                      .addLayer(() -> RenderType::cutoutMipped)
+                      .clientExtension(() -> () -> new TrackBlock.RenderProperties())
+                      .onRegister(CreateRegistrate.blockModel(() -> TrackModel::new))
+                      .item(TrackBlockItem::new)
+                      .build()
+                      .register();
+
+              public static final BlockEntry<BrassBogeyBlock> BRASS_BOGEY = Railworks.REGISTRATE
+                      .block("brass_bogey", BrassBogeyBlock::new)
+                      .initialProperties(SharedProperties::softMetal)
+                      .properties(p -> p.mapColor(MapColor.GOLD)
+                              .sound(SoundType.NETHERITE_BLOCK)
+                              .noOcclusion())
+                      .register();
+
+              public static void init() {
+              }
+          }
+          EOF_36
+          mkdir -p "$(dirname 'src/main/java/com/example/railworks/BrassBogeyBlock.java')"
+          cat > 'src/main/java/com/example/railworks/BrassBogeyBlock.java' <<'EOF_37'
+          package com.example.railworks;
+
+          import com.simibubi.create.AllBlocks;
+          import com.simibubi.create.content.trains.bogey.AbstractBogeyBlock;
+          import com.simibubi.create.content.trains.bogey.BogeySizes;
+          import com.simibubi.create.content.trains.bogey.BogeyStyle;
+          import com.simibubi.create.content.trains.track.TrackMaterial;
+
+          import net.minecraft.core.BlockPos;
+          import net.minecraft.world.entity.player.Player;
+          import net.minecraft.world.item.ItemStack;
+          import net.minecraft.world.level.LevelReader;
+          import net.minecraft.world.level.block.entity.BlockEntityType;
+          import net.minecraft.world.level.block.state.BlockState;
+          import net.minecraft.world.phys.HitResult;
+          import net.minecraft.world.phys.Vec3;
+
+          public class BrassBogeyBlock extends AbstractBogeyBlock<BrassBogeyBlockEntity> {
+              public BrassBogeyBlock(Properties properties) {
+                  super(properties, BogeySizes.SMALL);
+              }
+
+              @Override
+              public TrackMaterial.TrackType getTrackType(BogeyStyle style) {
+                  return RWTracks.BRASS_TYPE;
+              }
+
+              @Override
+              public double getWheelPointSpacing() {
+                  return 2;
+              }
+
+              @Override
+              public double getWheelRadius() {
+                  return 6.5 / 16d;
+              }
+
+              @Override
+              public Vec3 getConnectorAnchorOffset() {
+                  return new Vec3(0, 7 / 32f, 1);
+              }
+
+              @Override
+              public BogeyStyle getDefaultStyle() {
+                  return RWBogeys.BRASS;
+              }
+
+              @Override
+              public ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader level, BlockPos pos,
+                                                 Player player) {
+                  return AllBlocks.RAILWAY_CASING.asStack();
+              }
+
+              @Override
+              public Class<BrassBogeyBlockEntity> getBlockEntityClass() {
+                  return BrassBogeyBlockEntity.class;
+              }
+
+              @Override
+              public BlockEntityType<? extends BrassBogeyBlockEntity> getBlockEntityType() {
+                  return RWBlockEntities.BRASS_BOGEY.get();
+              }
+          }
+          EOF_37
+          mkdir -p "$(dirname 'src/main/java/com/example/railworks/BrassBogeyBlockEntity.java')"
+          cat > 'src/main/java/com/example/railworks/BrassBogeyBlockEntity.java' <<'EOF_38'
+          package com.example.railworks;
+
+          import com.simibubi.create.content.trains.bogey.AbstractBogeyBlockEntity;
+          import com.simibubi.create.content.trains.bogey.BogeyStyle;
+
+          import net.minecraft.core.BlockPos;
+          import net.minecraft.world.level.block.entity.BlockEntityType;
+          import net.minecraft.world.level.block.state.BlockState;
+
+          public class BrassBogeyBlockEntity extends AbstractBogeyBlockEntity {
+              public BrassBogeyBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+                  super(type, pos, state);
+              }
+
+              @Override
+              public BogeyStyle getDefaultStyle() {
+                  return RWBogeys.BRASS;
+              }
+          }
+          EOF_38
+          mkdir -p "$(dirname 'src/main/java/com/example/railworks/RWBlockEntities.java')"
+          cat > 'src/main/java/com/example/railworks/RWBlockEntities.java' <<'EOF_39'
+          package com.example.railworks;
+
+          import com.simibubi.create.content.trains.bogey.BogeyBlockEntityRenderer;
+          import com.simibubi.create.content.trains.bogey.BogeyBlockEntityVisual;
+          import com.tterrag.registrate.util.entry.BlockEntityEntry;
+
+          public class RWBlockEntities {
+              public static final BlockEntityEntry<BrassBogeyBlockEntity> BRASS_BOGEY = Railworks.REGISTRATE
+                      .blockEntity("brass_bogey", BrassBogeyBlockEntity::new)
+                      .visual(() -> BogeyBlockEntityVisual::new, false)
+                      .renderer(() -> BogeyBlockEntityRenderer::new)
+                      .validBlocks(RWBlocks.BRASS_BOGEY)
+                      .register();
+
+              public static void init() {
+              }
+          }
+          EOF_39
+          mkdir -p "$(dirname 'src/main/java/com/example/railworks/RWBogeys.java')"
+          cat > 'src/main/java/com/example/railworks/RWBogeys.java' <<'EOF_40'
+          package com.example.railworks;
+
+          import com.simibubi.create.content.trains.bogey.BogeySizes;
+          import com.simibubi.create.content.trains.bogey.BogeyStyle;
+
+          import net.minecraft.network.chat.Component;
+          import net.minecraft.resources.ResourceLocation;
+
+          public class RWBogeys {
+              /** Own cycle group: wrench-cycling never swaps Brass bogeys with standard ones. */
+              public static final ResourceLocation BRASS_CYCLE_GROUP = Railworks.id("brass");
+
+              public static final BogeyStyle BRASS = new BogeyStyle.Builder(Railworks.id("brass"), BRASS_CYCLE_GROUP)
+                      .displayName(Component.translatable("railworks.bogey.style.brass"))
+                      .size(BogeySizes.SMALL, RWBlocks.BRASS_BOGEY, () -> () -> {
+                          RWPartialModels.init();
+                          return new BogeyStyle.SizeRenderer(new BrassBogeyRenderer(), BrassBogeyVisual::new);
+                      })
+                      .build();
+
+              public static void init() {
+              }
+          }
+          EOF_40
+          mkdir -p "$(dirname 'src/main/java/com/example/railworks/RWPartialModels.java')"
+          cat > 'src/main/java/com/example/railworks/RWPartialModels.java' <<'EOF_41'
+          package com.example.railworks;
+
+          import dev.engine_room.flywheel.lib.model.baked.PartialModel;
+
+          public class RWPartialModels {
+              public static final PartialModel
+                      BOGEY_FRAME = PartialModel.of(Railworks.id("block/bogey/frame")),
+                      BOGEY_WHEELS = PartialModel.of(Railworks.id("block/bogey/wheel"));
+
+              public static void init() {
+              }
+          }
+          EOF_41
+          mkdir -p "$(dirname 'src/main/java/com/example/railworks/BrassBogeyRenderer.java')"
+          cat > 'src/main/java/com/example/railworks/BrassBogeyRenderer.java' <<'EOF_42'
+          package com.example.railworks;
+
+          import com.mojang.blaze3d.vertex.PoseStack;
+          import com.mojang.blaze3d.vertex.VertexConsumer;
+          import com.simibubi.create.AllBlocks;
+          import com.simibubi.create.content.kinetics.simpleRelays.ShaftBlock;
+          import com.simibubi.create.content.trains.bogey.BogeyRenderer;
+
+          import net.createmod.catnip.data.Iterate;
+          import net.createmod.catnip.render.CachedBuffers;
+          import net.createmod.catnip.render.SuperByteBuffer;
+          import net.minecraft.client.renderer.MultiBufferSource;
+          import net.minecraft.client.renderer.RenderType;
+          import net.minecraft.core.Direction;
+          import net.minecraft.nbt.CompoundTag;
+          import net.minecraft.world.level.block.Blocks;
+
+          public class BrassBogeyRenderer implements BogeyRenderer {
+              @Override
+              public void render(CompoundTag bogeyData, float wheelAngle, float partialTick, PoseStack poseStack,
+                                 MultiBufferSource bufferSource, int light, int overlay, boolean inContraption) {
+                  VertexConsumer buffer = bufferSource.getBuffer(RenderType.cutoutMipped());
+
+                  SuperByteBuffer shaft = CachedBuffers.block(AllBlocks.SHAFT.getDefaultState()
+                          .setValue(ShaftBlock.AXIS, Direction.Axis.Z));
+                  for (int i : Iterate.zeroAndOne) {
+                      shaft.translate(-.5f, .25f, i * -1)
+                              .center()
+                              .rotateZDegrees(wheelAngle)
+                              .uncenter()
+                              .light(light)
+                              .overlay(overlay)
+                              .renderInto(poseStack, buffer);
+                  }
+
+                  CachedBuffers.partial(RWPartialModels.BOGEY_FRAME, Blocks.AIR.defaultBlockState())
+                          .scale(1 - 1 / 512f)
+                          .light(light)
+                          .overlay(overlay)
+                          .renderInto(poseStack, buffer);
+
+                  SuperByteBuffer wheels = CachedBuffers.partial(RWPartialModels.BOGEY_WHEELS, Blocks.AIR.defaultBlockState());
+                  for (int side : Iterate.positiveAndNegative) {
+                      wheels.translate(0, 12 / 16f, side)
+                              .rotateXDegrees(wheelAngle)
+                              .light(light)
+                              .overlay(overlay)
+                              .renderInto(poseStack, buffer);
+                  }
+              }
+          }
+          EOF_42
+          mkdir -p "$(dirname 'src/main/java/com/example/railworks/BrassBogeyVisual.java')"
+          cat > 'src/main/java/com/example/railworks/BrassBogeyVisual.java' <<'EOF_43'
+          package com.example.railworks;
+
+          import java.util.function.Consumer;
+
+          import org.jetbrains.annotations.Nullable;
+
+          import com.mojang.blaze3d.vertex.PoseStack;
+          import com.simibubi.create.AllPartialModels;
+          import com.simibubi.create.content.trains.bogey.BogeyVisual;
+          import com.simibubi.create.foundation.render.SpecialModels;
+
+          import dev.engine_room.flywheel.api.instance.Instance;
+          import dev.engine_room.flywheel.api.visualization.VisualizationContext;
+          import dev.engine_room.flywheel.lib.instance.InstanceTypes;
+          import dev.engine_room.flywheel.lib.instance.TransformedInstance;
+          import dev.engine_room.flywheel.lib.model.Models;
+          import net.minecraft.core.Direction;
+          import net.minecraft.nbt.CompoundTag;
+
+          public class BrassBogeyVisual implements BogeyVisual {
+              private final TransformedInstance shaft1;
+              private final TransformedInstance shaft2;
+              private final TransformedInstance frame;
+              private final TransformedInstance wheel1;
+              private final TransformedInstance wheel2;
+
+              public BrassBogeyVisual(VisualizationContext ctx, float partialTick, boolean inContraption) {
+                  var shaftInstancer = ctx.instancerProvider()
+                          .instancer(InstanceTypes.TRANSFORMED, Models.partial(AllPartialModels.SHAFT));
+                  shaft1 = shaftInstancer.createInstance();
+                  shaft2 = shaftInstancer.createInstance();
+
+                  var wheelInstancer = ctx.instancerProvider()
+                          .instancer(InstanceTypes.TRANSFORMED, SpecialModels.smoothLit(RWPartialModels.BOGEY_WHEELS));
+                  frame = ctx.instancerProvider()
+                          .instancer(InstanceTypes.TRANSFORMED, SpecialModels.smoothLit(RWPartialModels.BOGEY_FRAME))
+                          .createInstance();
+                  wheel1 = wheelInstancer.createInstance();
+                  wheel2 = wheelInstancer.createInstance();
+              }
+
+              @Override
+              public void update(CompoundTag bogeyData, float wheelAngle, PoseStack poseStack) {
+                  shaft1.setTransform(poseStack)
+                          .translate(-.5f, .25f, 0)
+                          .center()
+                          .rotateTo(Direction.UP, Direction.SOUTH)
+                          .rotateYDegrees(wheelAngle)
+                          .uncenter()
+                          .setChanged();
+                  shaft2.setTransform(poseStack)
+                          .translate(-.5f, .25f, -1)
+                          .center()
+                          .rotateTo(Direction.UP, Direction.SOUTH)
+                          .rotateYDegrees(wheelAngle)
+                          .uncenter()
+                          .setChanged();
+                  wheel1.setTransform(poseStack)
+                          .translate(0, 12 / 16f, -1)
+                          .rotateXDegrees(wheelAngle)
+                          .setChanged();
+                  wheel2.setTransform(poseStack)
+                          .translate(0, 12 / 16f, 1)
+                          .rotateXDegrees(wheelAngle)
+                          .setChanged();
+                  frame.setTransform(poseStack)
+                          .scale(1 - 1 / 512f)
+                          .setChanged();
+              }
+
+              @Override
+              public void hide() {
+                  shaft1.setZeroTransform().setChanged();
+                  shaft2.setZeroTransform().setChanged();
+                  frame.setZeroTransform().setChanged();
+                  wheel1.setZeroTransform().setChanged();
+                  wheel2.setZeroTransform().setChanged();
+              }
+
+              @Override
+              public void updateLight(int packedLight) {
+                  shaft1.light(packedLight).setChanged();
+                  shaft2.light(packedLight).setChanged();
+                  frame.light(packedLight).setChanged();
+                  wheel1.light(packedLight).setChanged();
+                  wheel2.light(packedLight).setChanged();
+              }
+
+              @Override
+              public void collectCrumblingInstances(Consumer<@Nullable Instance> consumer) {
+                  consumer.accept(shaft1);
+                  consumer.accept(shaft2);
+                  consumer.accept(frame);
+                  consumer.accept(wheel1);
+                  consumer.accept(wheel2);
+              }
+
+              @Override
+              public void delete() {
+                  shaft1.delete();
+                  shaft2.delete();
+                  frame.delete();
+                  wheel1.delete();
+                  wheel2.delete();
+              }
+          }
+          EOF_43
+          mkdir -p "$(dirname 'src/main/resources/assets/railworks/textures/block/brass_track.png')"
+          base64 -d > 'src/main/resources/assets/railworks/textures/block/brass_track.png' <<'EOF_44'
+          iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAADXklEQVR42tVXPWzTQBT+nFx8TlKcKkkjtU0rFjKwQCUEKwuoGwsD
+          CwsSM2xIDFRiYmBhrgQSEmwMCAQTS4VYqNQfJFTSIFKS/qVxWie1YztuzZD4ajt2GhBV4Fvse/fe3ffe++4sc/PPrlvp4ShsVPea
+          sMeK1oIka6jVdaiaidxEAuUdBfmfe/AiNzmM82fSqO41kS/JyE0k2Dora7uYvvuWgw+IqptYWdsFAKQTAvIlGfmSDABIihS1us6c
+          8yUZ7z6tQeDDyE0OM/tyQXKRauomqrKG8o4CgQ9jfUdBEEKrJZltki/JaOommrqJpEhdgUmRIilSbNdUjKXjrkVsm8CHIfBhZpdk
+          jREKAtdPC1Y7FfEu7ERMIEiKAtuwXNlHKiEw/5nZz/4tcA4UrQVVN7G4WoWqmchm4qjVdaQSgksDqYTQpYNsZgjZkTir5PdyHQ21
+          hUqtiefvv3FBFSBLBQlRSli/7XKNj8SxWpIRpYS1oNrJXJI1ZDNDrhhVM5EvyUiKFOXKPjYlBcWtBmgkhF4g4x3W3s0BIEoJchMJ
+          trG9uV/MUZ8pAGA0FQflw9CNg94ElgsS6yEAqJrJMkolBCwVpK6e2+OYQKBqpiu+UG4LubjVwKlYBA211ZuAHWhvbj9jAmFEvJt5
+          /Z1is9ebW9jg0AdIlJJADazvKEzZSbFdWs04gCRrXTFRSpguvEQHooG+CZyUBvoFd/vaWUs3DkA7N5itWuq40Zx2J5wqPy5+9vVX
+          /4toNBVrZ+7DOta5A5xzto0J8Tey9SWwkK8CAA4tC0bLnaXAk2PnbPj59EVAM0zorcPuGctiD8M89J3zjfP4/PPgrlzMdlHlI2GE
+          OLdmNMMM9Ok19+ZjseeFRE6PirAsC0annJQPu8Z8JNR5p10n4KjawfHHaqCfY+T3UbGPbr/HMJBAcasRKKJ2Nv4ipHz4/xehtXnf
+          Ig9uXbBO8iJ6/GIxWIQVBaS42RhYBepVBZy1dOeoWZk4Y9Zlc9ozcX8f53xnzJ17EliBLy9vWOTD3A/UFQNinG+z8rwDYOOuDALi
+          /MZ+2JZUkIdP5/tWvVPgzMcTRyMh/zV8UK7sg1yeGjvRr+HcwkbgnPOvayC4d3PKCg2SgCRr+CsEXj2anvmTuN3GgFtw9dKE9QvQ
+          5mv9y+LYIgAAAABJRU5ErkJggg==
+          EOF_44
+          mkdir -p "$(dirname 'src/main/resources/assets/railworks/textures/block/brass_track_mip.png')"
+          base64 -d > 'src/main/resources/assets/railworks/textures/block/brass_track_mip.png' <<'EOF_45'
+          iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABKklEQVR42u1UQUrEMBR9taWNCp1SuxDBEUGLOwX3nmEWXsB7eBdv
+          4REEwZUgSMbNGAWHaWsz0CZx4uhmGihTcdlN3i6Pz/vv/0+ec3117qBHbKBn9G7AG10cLpNo0xBZKdC8K7lAziWKuUItNdL9Ad5m
+          FehruSaUDiOcHSfISgHKOOIwwPusglAaOZdY6GXnsF6tNJ4nnwCAZEBAGQdlHAAQhwGKuTLFlHHc3k1AfBfpMDL840veMiWUxsnB
+          bqvRR153n2DMuGlCGYdQGkJpM0GDOAwQhwGmRY29ZLsl0nDEd0F81/Dy67ul0QXn4eby578TjFcbaZBzuSa0RTzEITEbOD3aQbaq
+          u3+a/nkCx35DmwM2B2wO2BywOWBzwOaAzQFrwBqwBvo28AtYvof/baQcfwAAAABJRU5ErkJggg==
+          EOF_45
+          mkdir -p "$(dirname 'src/main/resources/assets/railworks/textures/block/brass_track_crossing.png')"
+          base64 -d > 'src/main/resources/assets/railworks/textures/block/brass_track_crossing.png' <<'EOF_46'
+          iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAFJUlEQVR42uWXzW4jRRSFv3ZsV9uOu/07keNkwMnMZBBCQhOEBEvY
+          sWbFM7DjLXgTniALYEsQYkYCschkMplRHCcT/Nvt2O6ynTQLu8rdbk+EEBILWmqpVdV1z617zz11y/j26098/sMnxn/8xJcHirZJ
+          q+dRypkAPNy2KdomGTOB7/u0HY9SLrXSWKs30nMDb0Lb8ei4kqE35fzPa23bMFY44PtwPZrw/S91vvnqQ3wfun1J/eqaF3WHzVKG
+          i9YAgJSIk88Kun1JwRIAlGyT47rDcd0BoGAJOq4Mbeyn39+wWc6QTSeiKfDxuWgO2Cik6biSbn+22DAMNksZun1JSsRJiTgPtmwM
+          IwxyXHcYySkjOaVgCRrNgQYpWIKibSInN/z8xxt8f0UEyrkUMcPg0f0cm6UMJ+cOaTOuF7/3bj6Ugnv51J0p2N5Yp+14vKg7NJpT
+          Ptgt8sWn71CwBL+9aEcdSIk4W/fWMZNrdFwP51oiJzdctgZ44xsAcllBbx6ZXFbgySnAynkzuYYp4rR6HgAn545OdSln0na8sANp
+          M87Qm9JxJaO54YIlqFXKALy6dOkGcmrMgXeqFvms0OO5daH/B9jfK3NweKbtq9RGIlCwBENvqpn/suFSq1j0rmd8UOBBsGXwbl+G
+          ANT6oH3f93m4bUcjULRNht6URnNA0TZ52XD58ddzbSwIlLcE+awgty60g+of9d11JaeN2fpkIkbRNhmMply0ZvYjEciYCTqupFrO
+          kDETOr9B0OCuNNBSSLuujIyNJ7dkzATdvmSzNLP/ViUMlo8K8U7VolaZva8uXQ1w2nA5bSy4cdpYzO1UrVCK/HntXbQG+jsUgVZv
+          FConb3xDPiv0jhWpgrvcqVo6HWp8OWW1isXB4ZnOORD61g6o+j2uO/pbkSoIkLfE4p3zANBky2cFT/bKC/LOI1LKpbj1Z+UYlPLQ
+          WdByPC2tZnJNj582XM2BIGgQWIU9WLJqjXo6rhci80oOBPV7Oaw7VUszX70AtU0r5GzXldqZ7rK9t+mA7/t0XH24+KaIG0H2B3cc
+          NNJ1JU+PmhpQrdGlaQmuOqNl+6tTsBye4LjKZ61iRRifz4rQTrVozcGSiZgWozv7gW5f8mDLnum7nJLPWrrU8tkZ8Z49b2piqrFV
+          oGozpw03lN5H2/ZqB5o9j5GccnLuEDPC0hrM57IAqWp4slfm2fNmJNfdvmQ8udX2Vb8QIWFQHou2qU+4/cdlnuyVtTG1s6DQ5NaF
+          Bl/e+f7jMslEjHJuYX9lGcYMqBTT9K7HGPOeSeX71cW8rOaquLzD4GGlnPj8o62QFAO6sVmZgoE35bI9ZLOUYeBNZmd7gPERYCVK
+          WcHTo6b+R0fLlaH1A292EFXLM/sRB9qOh5lco9uXZFJxekusV+ISZP5pw2WnarH/uBypACXdtYrF0esebccjJeJ0XEnajEcdODl3
+          SIl4SIz+zX5glf1IGebWk/Suxwy9KePJLQeHZ5G6TSZiOqdXndGdPf/R695KPQkefCEHFPl2q5ah2rK77gW+7+s1ak5V08Cbzu8F
+          HiN5w27V4qI10O2exlRXs4Il+O6HEzYKab78bBeRmPHB93288c3Ke0HHXQDms4KXAdFR0QxK/cHhGSKxxsP7NrG547EFCSUfv7+B
+          SKzRdry/dS8o2iYdV3J763NyvrgX5NaTXLaHuvHIZwUFy+SqM6RSSmNgRCPg+7PLSXke3pSIh+4F/zQFqh0PHngrdcAwwMAIdSv/
+          i9vxXyqzZdeBcLwtAAAAAElFTkSuQmCC
+          EOF_46
+          mkdir -p "$(dirname 'src/main/resources/assets/railworks/textures/item/brass_track.png')"
+          base64 -d > 'src/main/resources/assets/railworks/textures/item/brass_track.png' <<'EOF_47'
+          iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABmklEQVR42s2SMUgbYRiGn2goqEho6UUsRJREjiOTIVCEOJgWQoaA
+          BeMaSEBHyViLIC2NOBTj6BBBAl2ytUOWNl0CoTRc6eJ5cEHMSaB3Il7R+XdoLyS0VifxXd/v/Xj+9/vh3iubUkQ2pYjrfO9tluzk
+          YwAiOTuBqtts7qse1xu4KdyxL9gqq5RezVNttFleCPMyE+kSeXpRAfY+ah6ASiEhAFTd5rtuE1X8vFl5Su7tF3pJvNehRhV/H0lT
+          s1jf/cpOPsbqdp31bBRADLoDY4+GNo46vyjmY7x7/4PMizCfGm1U3SYiSwCohzYn1iXa0Rmd00sABiuFhFh6FtpwB/Tjc4r5GLnX
+          n5kO+EjNTfFEGkH8efW3g58AjD8ewTCd3yUuJmWWF8LMyFIfarXRZnLyIU3NQtVtAGZkidHhBximQ6XW8nhdoxe1qVlslVU69gVr
+          xXq3B8N0AKjUWt3yvYbpYJgOS89DLCZlooqfpmZR+nDw32DfGdPxoAgFfERkqYt6U/Cvf5COBwVAKOC7VfCfSseDwl10Z7oCw/+x
+          n0wL18wAAAAASUVORK5CYII=
+          EOF_47
+          mkdir -p "$(dirname 'src/main/resources/assets/railworks/textures/block/bogey/frame.png')"
+          base64 -d > 'src/main/resources/assets/railworks/textures/block/bogey/frame.png' <<'EOF_48'
+          iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAEMUlEQVR42rWWzW8bVRTFf+NMnDiepHac4CZuUsmB1IuIhKoSIgiq
+          iA2REBKLoqqLoCLBpizoAnWVVRcof0N3ldoVYoEiwQqJRkTqpkqyslwcUduhNont2jPjsceEYTGe8fhr7AA50kgzfu/d93zfPedc
+          4fb6khEO+lmcCzIIEukiuaIKQDjo7zGnAMAFacQ1VkmpIb735iVi8yEAVhamAfCFJ0AaBaUKgJYrA7CXPCY2HyKeygNwcy1mzm3M
+          2Use28EfbO9z+McrojMBACYnRgEolM2Yhy9fEZ0NIFyZCxoAfp93oAyomt7y3b7OGl9dioABR3mF+Is8RycKAJEpidjlEJGQBAKI
+          Fyf9SD4vks/L+Jj7IeSKjqKZD2Cvc8I5bgDxF3lSf8r2uPU+G5IQAI845OHujWsomo5ccX8UTefujWuIQx5krW5v1v7IWh2A0MSo
+          /c+dODpRCDWuxFNUatx/uMuguP9wl6JS4/+Ch3NEoVwlMiV1/B6Zksg3ilHknBG7HLLT7ixCoTF+rgc4fGnSMBKSetLQE5RG2NxY
+          HTjo5sYqwT4CY4lMdDYAAiBAQa5SkKv2d3Q2QEmpIVxfvmScBw1/2c8IVxfDxrhvuOscWavzLJETxGxBBdR/KURqTyEC+OqTt4jN
+          h1hZmMa38BooVVsx46k8n2/9hHjv1ttnkmJgIClevfOI7d0kOweZDs/IFVVKDSoL52VG3+88F67MBY1emVU1nU/XYu4s0Oun/J4t
+          2ydudzfrIO24II1we33JsNaEg34+fvd14qk8sfkQq3ceCZsb7xhyRW+6YUv629IeT+XZOcjwxUfL9jy3q7LWPdjet79XFqb54dff
+          uLkWMwuxoqNodcStx09xc8MWdwPW733XUv3jY17kit7Bgm+/vN4SxxeeYHEuaP9BRasjV3R3N2ynXTfHyxYGF6ZEutiMUTXNTLSc
+          qxva3e2/QMuVWZwL2tdkxfYAvL8813Ohc8yi3yDoNteZgUq1jqzVTRY82U93qJWFJ/vplgCffbhkmkxDO3pt7NzMgpPqckVH1fTB
+          zaik1CgpNbvh3N5NDrTOou5e8phEumiLlVqtE//xa1r0upeuy1q9oxd0Qz9ZVzWd+M/fwFHxbHZ8cdLv2uVmC6Y3vBEJMj7mRfIN
+          ozQKuINRSpVsXj3bAaIzgZ5dbnQmgGlspjY8z3Tnp+TzImt1tFyZzLF8tgP063Kbmwz3jbWXPKZQ1s5Gw0G6XEvlTJFqeoX1btVZ
+          PGVm0dNONTcaDgpLmp3F2F6YiXSRolxFdDLArSNSNd3ucp1X0N7lOjEyPNT13XJS/a9T+nZE7fTr1+Va9AXwis2u33q3xkpKDcOg
+          2RH1s+Otx0/7drnOA1h37dQWJw1PShqnfxuIOwcZEuliT513dkDZgtpSWG4ZaxqY2nXOs0RO+ODqvPEPh8XF5ajNRKYAAAAASUVO
+          RK5CYII=
+          EOF_48
+          mkdir -p "$(dirname 'src/main/resources/assets/railworks/textures/block/bogey/frame2.png')"
+          base64 -d > 'src/main/resources/assets/railworks/textures/block/bogey/frame2.png' <<'EOF_49'
+          iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAE6ElEQVR42q1XT2gcVRj/bTKz2cnsrma2MbtuQ8HUJJCDiVFKYqH0
+          FkXFgmirUvDiQUutKEQRe1BEDx5UmouHiqJUTxEpGoJQtNogBBPFwGZtSprNkKSb2ZGdmX3bNzsZD7PzdnZ3srup+WDZN2/en+/9
+          vt/3+94Ejj1w0P7gpWMYf+VreO3a1PN48cMfIApBtGIGoXV9u811xy5n1AA3NpTEcF933aDhvm6IQhAJSQQAhMuLJWIiIp1OWytQ
+          bCgGAEAnFDqhGBtKYm5JZuP9TYROKJYzKrj+3q6mp9MJRU4rQoqEsKEAG4qBV58eBQCk1hRcmF5gY/t7uzA7vwqNmHXrRASetd33
+          nDu5MHMOQk8UAEC28vjmSoptDgBBrg0AkMsTSFEBw33dOPXeZYwOxEFNC7FoCBoxmTO/fnoKiytZAMDYeB/IVh6LK1m89dnPVU5x
+          BqG4ML2AL2b+9o1VROBBSzu4bVroighV7yefO4LUmgKzZNWd+N0v51g7taYgnVExfTWNeDmkzAFRCCIi8Ahy7c5JeeefmhakqMBO
+          H+TaYJYsUNNCWOIdtFayyOWL4Ll2RAS+yonzp8fqEHjykcP1CHgfvJt7YXcRCAtBhDoqU+JdnZCioToEEpKIo2cvVRb+5Kc6Dvg6
+          QE0LQb4dQb4d1LRASzvs9K4zeeM2Ojt4kK08NtWCLwIbOYNtVpsNek26trWKgEZM8Fw7W9AlLABfDrRqe0LALFnQCUVcEkG28iwE
+          fhxw296+piFohQNhIQidmBB6otgsk9APgT2loeMdQEtW1cvNnIG4JFZxgJoWIAAIhxoisKc0PHNiBCePD9YJkVfhaGmnCiXoRbw2
+          dQWjA3FfBFpNw8DFyQn75PFBdE58XPWiMHMOR89eQkJydNsln/vvSvH3v13H7PwqQ+DMiZEqxxtJ8R/prQCXzqhNmerG3luMfvz9
+          BitG9ye7WHqlMyoiAt+kGDn2YH+Pzc0tyQwqry2uZGEQio0cE2YAwD+y2rDETl9Ns/GtlOPAQG+XPT6UBABI0VC54BSdO8GSjEeP
+          3MdKbiIm4pe/1hmUGjFhEIrP33xs1/uEa8sZNeCrA+NDSciKjtRNBfK2DgBIHghj8FAM40NJRDqdtAOASKdTNzZzjkNxSfS9iHgv
+          JAlJxHV59zBzNoDUTQVrtzTW6bbvjYWxoRjQCrRhLFNryq59iVi4sQOxaIid3Gvyto5YNIT1rF6l3xoxWS67qZfOqLg4OVE1vxVy
+          1ymhn73x7MM42B0BAKxnHWS8zy+8fxmz86se8lXgjwh8U/S4XL6I5IFwVQhcHij5Iqa+W6gjZ+2zoxX8norQ6888ZH90/gkHgcFD
+          MQa7l4QBAC8/NdIQgbkluel9stbeOT1my9s6sK2Du7YkY3woiWQs7JuGts+Ja5/3alqBolA0sakY4Mr5acclEX/eMJlkbuYMLGfU
+          wFdvP243Q8Ar1a0goBMTJWsH61mtQkLvAk7byfVWOODogrEnBIrUwpZqOA6IrM5T5kBZRu27wx2QszpTwva2iqDFoqFdFa4ZL0xr
+          B/K2XrmSuV87fm3vbz/MPaiqFZvrQK0S3iX+fyc0YsLasXHr30LFAe8mtW0vkfbDAYNQBMoc4twO7yY6oW6RCXxb/kTbT1vOqIHh
+          w/fYVSHQCb3jq/Wd8kAnFP8B96Hxrru1qg0AAAAASUVORK5CYII=
+          EOF_49
+          mkdir -p "$(dirname 'src/main/resources/assets/railworks/textures/block/bogey/wheel.png')"
+          base64 -d > 'src/main/resources/assets/railworks/textures/block/bogey/wheel.png' <<'EOF_50'
+          iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAENUlEQVR42q2XT2wbRRTGf66cJetdo6zjJI6cHFqUlEO4UFUqJ+CC
+          oC0nkDghwa1wBYlWlThyAXFEcMqhXIpEK1WqkJAqJKJCBSEqTQ6JkzQ0sVW7drxtvet1bMfmYGbYf07WhO+0O2923ve+eW/mbQzo
+          4sO5MyeIgpt37oeO//71u0yNJcmMapDWYSQBj+s9Y8WiuGuTL9c4feEK8TDnltOMRODcmROhJG4tPcBIDpNN60wYGlNjSfLlGgAl
+          06ZQsTBrDQAvAb/zmtPC9pHRVIWkOgSA5TT7khAOAKbGkqHOPQTczt2O5y+elZNv3N7g+kIO22lKImEk5o6n5fOEofW2woVsWpfP
+          MaDrdw5gO03mL55ldXvX83Fux+T6Qg5NVQCkGrqqSBIPv/8Q4MAcAJh86yvi7oQTzoXUAu+/8QKLq0WWt8oBW81pBZT4/OpvAIyP
+          JGQuAFL+R4KM2AIRvZDd7QBgcbXIraUHjBsJz7iYL1SQ1fHrZmjOhOVUPCx6sccCy1vlvs7dKsh8euk5+Tw+kmDueDo0+rWdxWAZ
+          hjkYxAbw5XeLnJw2pAIL9/K93Kja8tu1HTNYhn7po+RAFOhyvh2wHYuygMiBQbC2Y3pK1XKaJNUhNFWR0QcU8Et74/YGs9OGJwdK
+          ph16OIVhJmsElMgAS7lSkEBSHfIsrKkKPy7+Rcm0mTA06fzPzTKaqnjm+qtgEEgCmZQuy8Qd0S8rBfnutgkSmqqQSekUq1Zg8as/
+          rfLOq88HxkIJFKsWM1mDZEJBV4dIJg5OtFq9ieW0qNWboc6jInAU/1e4j2I/hAr+6KUCN+/clz2AKJkoCrhP0X7OIykwaCNyUGPy
+          zUevkU3rFCoWL85MyF7g9IUrsbBvj0XpcAbpirJpnVOzGek8M6rJfuBQBf6PluzktCEr5NvL5w9VIJZN6x4CyYRCYniIpVwpFlWF
+          916fCwTx9suznJrNyJ6guFbij1wRgPOXrsm14/5kezbxDInhOEfFylaFla2Kpzta2aoA0F3/rPvx5Wt88embHN1TH8z/sBw4psXp
+          +ckHr2Bae1CxiItycqPd6RyZQCaloasKuqowOarxcNeWl5JTekq90aK4axOfmTKoN9q0Ox3qjd7JtrpdjR2VQLFqAzaaqrBeMD0K
+          3N0s097vkC/XiIuLxofuIM6cvXZfBbzQsJwmq9u7NJr7lEybeLFqyXZM3GrFqn1oL+e296LtOXUfzRsF0zMm1s3tmDTb+xQqVi8J
+          /dep+yNhP+jKdc8XweiqElgnk9KoOS1Kpi1/XuJ6xPZKJBMgEyrMJrCeN/uu9cTao95o8ehxnbi7UXTf+2Hvxarmkfxfu8ndDW/J
+          Taa0vgQqTxycvTbVp41oPeHRKiH4/vO9fGy/0+1tQY+pFshW//vBW2AwkUpwLBb754pusZ6voqlK378tcSb8DbefYY/naLk2AAAA
+          AElFTkSuQmCC
+          EOF_50
+          mkdir -p "$(dirname 'src/main/resources/logo.png')"
+          base64 -d > 'src/main/resources/logo.png' <<'EOF_51'
           iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAABMX0lEQVR42u29d3we1ZX//753ylPVmyXbcu/YBozpIAOmBjaERIRk
           Q9qSZBPIZtPL7kZ4k002m4RU2JRNr9gJhN5MEWADtnG3bOMqy7Z619Nm5t77+2MeCZPgBgZEft95vZ6XjSykmTmfU+45n3OO4O/m
           MoL6a2Vdx2wB0Nh4swJhTtAPF/X1S+Xu3b1y8uQSvWxZvQYBYN7sb028qe+9vl7WdcwWhxP2git/HE9lumNxUTzNSF2sfU8ryQyh
@@ -414,11 +1053,7 @@ jobs:
           LCqZYEhg7zXS2m1UbrMQ9gbpWs+tu7+z5SXRe0ODrG+aI0artr/5AXDofTc0iLonkC/nU+vrl1rbWncVOtGiGcboYl/kpgpFucAo
           6URnI0SxCPe8Hfr8wiB8FeQ2CK0DI0UgpbvBCDJa6S1ZV/TtfPATub++kbq6Bruyco55Mwn97wEAf5NToH6ZrOvYIhoXoV87sxu6
           o1Dg9Xp4F+eb+c39fywmDf83TLOhAAAAAElFTkSuQmCC
-          EOF_LOGO
-          base64 -d > src/main/resources/assets/railworks/textures/block/bogie_frame.png <<'EOF_TEX'
-          iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAT0lEQVR42mM8Oc3mPwMFgIWBgYGh95guWZqLrS4zMDFQCFAMKCrM
-          I6gBXQ3jyWk2/wePF8iOBZhzSAEwb1PPBeQG5MAH4jBISCzkpAFkAACBLBw44DpzwAAAAABJRU5ErkJggg==
-          EOF_TEX
+          EOF_51
 
       - name: Build jar
         run: gradle build --no-daemon
@@ -429,7 +1064,7 @@ jobs:
       - name: Upload jar (download button, no zip)
         uses: actions/upload-artifact@v7
         with:
-          path: build/libs/railworks-1.0.0.jar
+          path: build/libs/railworks-1.1.0.jar
           archive: false
           if-no-files-found: error
 
