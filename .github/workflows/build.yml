@@ -426,6 +426,13 @@ jobs:
       - name: Show jar
         run: ls -la build/libs
 
+      - name: Upload jar (download button, no zip)
+        uses: actions/upload-artifact@v7
+        with:
+          path: build/libs/railworks-1.0.0.jar
+          archive: false
+          if-no-files-found: error
+
       - name: Publish jar to GitHub Release
         if: startsWith(github.ref, 'refs/tags/v')
         uses: softprops/action-gh-release@v2
