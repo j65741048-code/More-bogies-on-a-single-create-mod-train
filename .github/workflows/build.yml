@@ -156,7 +156,7 @@ jobs:
               id 'net.neoforged.moddev' version '2.0.+'
           }
 
-          version = '1.1.1'
+          version = '1.1.2'
           group = 'com.example.railworks'
           base { archivesName = 'railworks' }
           java.toolchain.languageVersion = JavaLanguageVersion.of(21)
@@ -188,7 +188,7 @@ jobs:
 
           [[mods]]
           modId = "railworks"
-          version = "1.1.1"
+          version = "1.1.2"
           displayName = "Railworks"
           description = '''A Create addon: Brass train track with its own Brass bogey.'''
           logoFile = "logo.png"
@@ -219,14 +219,18 @@ jobs:
           cat > 'src/main/java/com/example/railworks/Railworks.java' <<'EOF_33'
           package com.example.railworks;
 
+          import com.simibubi.create.AllBlocks;
           import com.simibubi.create.foundation.data.CreateRegistrate;
 
           import net.minecraft.core.registries.Registries;
           import net.minecraft.network.chat.Component;
           import net.minecraft.resources.ResourceLocation;
           import net.minecraft.world.item.CreativeModeTab;
+          import net.minecraft.world.level.ItemLike;
+          import net.neoforged.bus.api.EventPriority;
           import net.neoforged.bus.api.IEventBus;
           import net.neoforged.fml.common.Mod;
+          import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
           import net.neoforged.neoforge.registries.DeferredRegister;
 
           import java.util.function.Supplier;
@@ -243,17 +247,34 @@ jobs:
                       CreativeModeTab.builder()
                               .title(Component.translatable("itemGroup.railworks"))
                               .icon(() -> RWBlocks.BRASS_TRACK.asStack())
-                              // Items are added to this tab by Registrate. Adding the track here as well
-                              // made it appear twice and crashed when the inventory / creative tab opened.
+                              // Contents are added in fillTab() below (not here), so nothing can be added twice.
                               .build());
 
               public static ResourceLocation id(String path) {
                   return ResourceLocation.fromNamespaceAndPath(MODID, path);
               }
 
+              /** Fills the Railworks creative tab: Brass Train Track + Railway Casing (what the Brass Bogey is made from). */
+              private static void fillTab(BuildCreativeModeTabContentsEvent event) {
+                  if (event.getTab() != MAIN_TAB.get()) return;
+                  addOnce(event, RWBlocks.BRASS_TRACK.get());
+                  addOnce(event, AllBlocks.RAILWAY_CASING.get());
+              }
+
+              /** NeoForge throws if an item is already in the tab (that was the inventory crash), so skip duplicates. */
+              private static void addOnce(BuildCreativeModeTabContentsEvent event, ItemLike item) {
+                  try {
+                      event.accept(item);
+                  } catch (IllegalArgumentException alreadyInTab) {
+                      // Registrate already added it - fine.
+                  }
+              }
+
               public Railworks(IEventBus modBus) {
                   REGISTRATE.registerEventListeners(modBus);
                   TABS.register(modBus);
+                  // LOWEST = runs after Registrate's own tab listener, so the duplicate guard below works
+                  modBus.addListener(EventPriority.LOWEST, Railworks::fillTab);
                   // Order matters: track material -> blocks -> block entities -> bogey style
                   RWTracks.init();
                   RWBlocks.init();
@@ -1090,7 +1111,7 @@ jobs:
       - name: Upload jar (download button, no zip)
         uses: actions/upload-artifact@v7
         with:
-          path: build/libs/railworks-1.1.1.jar
+          path: build/libs/railworks-1.1.2.jar
           archive: false
           if-no-files-found: error
 
