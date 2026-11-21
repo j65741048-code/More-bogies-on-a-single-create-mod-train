@@ -1,0 +1,48 @@
+plugins {
+    id 'java'
+    id 'net.neoforged.moddev' version '2.0.78'
+}
+
+def modId = 'railworks'
+def minecraftVersion = '1.21.1'
+def neoVersion = '21.1.172'
+def createVersion = '6.0.6-150'
+def ponderVersion = '1.0.60'
+def flywheelVersion = '1.0.4'
+def registrateVersion = 'MC1.21-1.3.0+62'
+
+version = '1.0.0'
+group = 'com.example.railworks'
+base { archivesName = modId }
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+repositories {
+    mavenCentral()
+    maven { url = 'https://maven.createmod.net' }
+    maven { url = 'https://maven.ithundxr.dev/mirror' }
+    maven { url = 'https://modmaven.dev' }
+}
+
+neoForge {
+    version = neoVersion
+    runs {
+        client { client() }
+        server { server(); programArgument '--nogui' }
+    }
+    mods { "${modId}" { sourceSet sourceSets.main } }
+}
+
+dependencies {
+    implementation("com.simibubi.create:create-${minecraftVersion}:${createVersion}:slim") { transitive = false }
+    implementation "net.createmod.ponder:Ponder-NeoForge-${minecraftVersion}:${ponderVersion}"
+    compileOnly "dev.engine-room.flywheel:flywheel-neoforge-api-${minecraftVersion}:${flywheelVersion}"
+    runtimeOnly "dev.engine-room.flywheel:flywheel-neoforge-${minecraftVersion}:${flywheelVersion}"
+    implementation "com.tterrag.registrate:Registrate:${registrateVersion}"
+}
+
+processResources {
+    def props = [mod_id: modId, mod_name: 'Railworks', mod_version: version,
+                 minecraft_version: minecraftVersion, create_version: createVersion]
+    inputs.properties props
+    filesMatching('META-INF/neoforge.mods.toml') { expand props }
+}
