@@ -2,8 +2,6 @@ name: Build Railworks
 
 on:
   push:
-    branches: [main]
-    tags: ['v*']
   workflow_dispatch:
 
 permissions:
@@ -24,10 +22,136 @@ jobs:
         with:
           gradle-version: 8.10.2
 
-      - name: Write mod icon into resources
+      - name: Generate project files (Gradle settings, mod code, icon)
         run: |
-          mkdir -p src/main/resources
-          base64 -d > src/main/resources/logo.png <<'EOF_ICON'
+          mkdir -p $(dirname 'settings.gradle')
+          cat > 'settings.gradle' <<'EOF_0'
+          rootProject.name = 'railworks'
+          EOF_0
+          mkdir -p $(dirname 'build.gradle')
+          cat > 'build.gradle' <<'EOF_1'
+          plugins {
+              id 'java'
+              id 'net.neoforged.moddev' version '2.0.+'
+          }
+
+          version = '1.0.0'
+          group = 'com.example.railworks'
+          base { archivesName = 'railworks' }
+          java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+          repositories {
+              mavenCentral()
+          }
+
+          neoForge {
+              version = '21.1.219'
+              mods { railworks { sourceSet sourceSets.main } }
+          }
+          EOF_1
+          mkdir -p $(dirname 'src/main/resources/META-INF/neoforge.mods.toml')
+          cat > 'src/main/resources/META-INF/neoforge.mods.toml' <<'EOF_2'
+          modLoader = "javafml"
+          loaderVersion = "[1,)"
+          license = "MIT"
+
+          [[mods]]
+          modId = "railworks"
+          version = "1.0.0"
+          displayName = "Railworks"
+          description = '''A Create addon: bogie frames and rail hardware.'''
+          logoFile = "logo.png"
+          authors = "You"
+
+          [[dependencies.railworks]]
+          modId = "neoforge"
+          type = "required"
+          versionRange = "[21.1,)"
+          ordering = "NONE"
+          side = "BOTH"
+
+          [[dependencies.railworks]]
+          modId = "minecraft"
+          type = "required"
+          versionRange = "[1.21.1,1.22)"
+          ordering = "NONE"
+          side = "BOTH"
+
+          [[dependencies.railworks]]
+          modId = "create"
+          type = "required"
+          versionRange = "[6.0.6,)"
+          ordering = "AFTER"
+          side = "BOTH"
+          EOF_2
+          mkdir -p $(dirname 'src/main/java/com/example/railworks/Railworks.java')
+          cat > 'src/main/java/com/example/railworks/Railworks.java' <<'EOF_3'
+          package com.example.railworks;
+
+          import net.minecraft.core.registries.Registries;
+          import net.minecraft.network.chat.Component;
+          import net.minecraft.world.item.BlockItem;
+          import net.minecraft.world.item.CreativeModeTab;
+          import net.minecraft.world.item.Item;
+          import net.minecraft.world.level.block.Block;
+          import net.minecraft.world.level.block.state.BlockBehaviour;
+          import net.minecraft.world.level.material.MapColor;
+          import net.neoforged.bus.api.IEventBus;
+          import net.neoforged.fml.common.Mod;
+          import net.neoforged.neoforge.registries.DeferredBlock;
+          import net.neoforged.neoforge.registries.DeferredItem;
+          import net.neoforged.neoforge.registries.DeferredRegister;
+
+          import java.util.function.Supplier;
+
+          @Mod(Railworks.MODID)
+          public class Railworks {
+              public static final String MODID = "railworks";
+
+              public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MODID);
+              public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MODID);
+              public static final DeferredRegister<CreativeModeTab> TABS =
+                      DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
+
+              public static final DeferredBlock<Block> BOGIE_FRAME = BLOCKS.registerSimpleBlock("bogie_frame",
+                      BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(3.0f, 6.0f).requiresCorrectToolForDrops());
+              public static final DeferredItem<BlockItem> BOGIE_FRAME_ITEM = ITEMS.registerSimpleBlockItem(BOGIE_FRAME);
+
+              public static final Supplier<CreativeModeTab> MAIN_TAB = TABS.register("main", () ->
+                      CreativeModeTab.builder()
+                              .title(Component.translatable("itemGroup.railworks"))
+                              .icon(() -> BOGIE_FRAME_ITEM.get().getDefaultInstance())
+                              .displayItems((params, out) -> out.accept(BOGIE_FRAME_ITEM.get()))
+                              .build());
+
+              public Railworks(IEventBus modBus) {
+                  BLOCKS.register(modBus);
+                  ITEMS.register(modBus);
+                  TABS.register(modBus);
+              }
+          }
+          EOF_3
+          mkdir -p $(dirname 'src/main/resources/assets/railworks/blockstates/bogie_frame.json')
+          cat > 'src/main/resources/assets/railworks/blockstates/bogie_frame.json' <<'EOF_4'
+          {"variants":{"":{"model":"railworks:block/bogie_frame"}}}
+          EOF_4
+          mkdir -p $(dirname 'src/main/resources/assets/railworks/models/block/bogie_frame.json')
+          cat > 'src/main/resources/assets/railworks/models/block/bogie_frame.json' <<'EOF_5'
+          {"parent":"minecraft:block/cube_all","textures":{"all":"railworks:block/bogie_frame"}}
+          EOF_5
+          mkdir -p $(dirname 'src/main/resources/assets/railworks/models/item/bogie_frame.json')
+          cat > 'src/main/resources/assets/railworks/models/item/bogie_frame.json' <<'EOF_6'
+          {"parent":"railworks:block/bogie_frame"}
+          EOF_6
+          mkdir -p $(dirname 'src/main/resources/assets/railworks/lang/en_us.json')
+          cat > 'src/main/resources/assets/railworks/lang/en_us.json' <<'EOF_7'
+          {
+            "block.railworks.bogie_frame": "Bogie Frame",
+            "itemGroup.railworks": "Railworks"
+          }
+          EOF_7
+          mkdir -p src/main/resources/assets/railworks/textures/block
+          base64 -d > src/main/resources/logo.png <<'EOF_LOGO'
           iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAABMX0lEQVR42u29d3we1ZX//753ylPVmyXbcu/YBozpIAOmBjaERIRk
           Q9qSZBPIZtPL7kZ4k002m4RU2JRNr9gJhN5MEWADtnG3bOMqy7Z619Nm5t77+2MeCZPgBgZEft95vZ6XjSykmTmfU+45n3OO4O/m
           MoL6a2Vdx2wB0Nh4swJhTtAPF/X1S+Xu3b1y8uQSvWxZvQYBYN7sb028qe+9vl7WdcwWhxP2git/HE9lumNxUTzNSF2sfU8ryQyh
@@ -290,10 +414,17 @@ jobs:
           LCqZYEhg7zXS2m1UbrMQ9gbpWs+tu7+z5SXRe0ODrG+aI0artr/5AXDofTc0iLonkC/nU+vrl1rbWncVOtGiGcboYl/kpgpFucAo
           6URnI0SxCPe8Hfr8wiB8FeQ2CK0DI0UgpbvBCDJa6S1ZV/TtfPATub++kbq6Bruyco55Mwn97wEAf5NToH6ZrOvYIhoXoV87sxu6
           o1Dg9Xp4F+eb+c39fywmDf83TLOhAAAAAElFTkSuQmCC
-          EOF_ICON
+          EOF_LOGO
+          base64 -d > src/main/resources/assets/railworks/textures/block/bogie_frame.png <<'EOF_TEX'
+          iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAT0lEQVR42mM8Oc3mPwMFgIWBgYGh95guWZqLrS4zMDFQCFAMKCrM
+          I6gBXQ3jyWk2/wePF8iOBZhzSAEwb1PPBeQG5MAH4jBISCzkpAFkAACBLBw44DpzwAAAAABJRU5ErkJggg==
+          EOF_TEX
 
       - name: Build jar
         run: gradle build --no-daemon
+
+      - name: Show jar
+        run: ls -la build/libs
 
       - name: Publish jar to GitHub Release
         if: startsWith(github.ref, 'refs/tags/v')
